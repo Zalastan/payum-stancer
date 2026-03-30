@@ -1,0 +1,11 @@
+services:
+    SpiderWeb\Sylius\StancerPlugin\StancerGatewayFactory:
+        class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+        arguments: [SpiderWeb\Sylius\StancerPlugin\StancerGatewayFactory]
+        tags:
+            - { name: payum.gateway_factory_builder, factory: stancer }
+
+    SpiderWeb\Sylius\StancerPlugin\Form\Type\StancerGatewayConfigurationType:
+        tags:
+            - { name: sylius.gateway_configuration_type, type: stancer, label: 'sylius_stancer.ui.gateway_label' }
+            - { name: form.type }

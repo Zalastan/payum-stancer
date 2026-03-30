@@ -1,0 +1,5 @@
+sylius_stancer:
+    ui:
+        gateway_label: 'Stancer'
+        secret_key: 'Secret key (stest_... or slive_...)'
+        public_key: 'Public key (ptest_... or plive_...)'

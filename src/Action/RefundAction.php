@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SpiderWeb\PayumStancer\Action;
+namespace SpiderWeb\Sylius\StancerPlugin\Action;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;

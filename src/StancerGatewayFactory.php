@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SpiderWeb\PayumStancer;
+namespace SpiderWeb\Sylius\StancerPlugin;
 
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayFactory;
-use SpiderWeb\PayumStancer\Action\CaptureAction;
-use SpiderWeb\PayumStancer\Action\RefundAction;
-use SpiderWeb\PayumStancer\Action\StatusAction;
+use SpiderWeb\Sylius\StancerPlugin\Action\CaptureAction;
+use SpiderWeb\Sylius\StancerPlugin\Action\RefundAction;
+use SpiderWeb\Sylius\StancerPlugin\Action\StatusAction;
 
 final class StancerGatewayFactory extends GatewayFactory
 {
