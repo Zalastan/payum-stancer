@@ -1,0 +1,55 @@
+<?php
+
+declare(strict_types=1);
+
+namespace SpiderWeb\PayumStancer\Action;
+
+use Payum\Core\Action\ActionInterface;
+use Payum\Core\ApiAwareInterface;
+use Payum\Core\ApiAwareTrait;
+use Payum\Core\Bridge\Spl\ArrayObject;
+use Payum\Core\Exception\RequestNotSupportedException;
+use Payum\Core\Request\Refund;
+use Stancer\Config as StancerConfig;
+use Stancer\Payment as StancerPayment;
+
+final class RefundAction implements ActionInterface, ApiAwareInterface
+{
+    use ApiAwareTrait;
+
+    public function __construct()
+    {
+        $this->apiClass = 'array';
+    }
+
+    /**
+     * @param Refund $request
+     */
+    public function execute($request): void
+    {
+        RequestNotSupportedException::assertSupports($this, $request);
+
+        $model = ArrayObject::ensureArrayObject($request->getModel());
+
+        if (empty($model['stancer_payment_id'])) {
+            return;
+        }
+
+        StancerConfig::init($this->api['secret_key']);
+
+        $payment = new StancerPayment((string) $model['stancer_payment_id']);
+
+        // Remboursement partiel si un montant est spécifié, sinon remboursement total
+        if (!empty($model['refund_amount'])) {
+            $payment->refund((int) $model['refund_amount']);
+        } else {
+            $payment->refund();
+        }
+    }
+
+    public function supports($request): bool
+    {
+        return $request instanceof Refund
+            && $request->getModel() instanceof \ArrayAccess;
+    }
+}
