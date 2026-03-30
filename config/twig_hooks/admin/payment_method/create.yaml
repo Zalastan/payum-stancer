@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.payment_method.create.content.form.sections.gateway_configuration.stancer':
+            credentials:
+                template: '@StancerPlugin/admin/payment_method/form/sections/gateway_configuration/credentials.html.twig'
+                priority: 100
